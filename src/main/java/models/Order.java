@@ -15,6 +15,7 @@ public class Order {
         this.chips = chips;
     }
 
+    // methods
     public String addPizza(){
         return pizzas;
     }
@@ -30,6 +31,8 @@ public class Order {
 
     }
 
+    // getters
+
     public String getPizzas() {
         return pizzas;
     }
@@ -42,6 +45,7 @@ public class Order {
         return chips;
     }
 
+    // Order Summary
     public String getOrderSummary(){
         String orderSummary = "Order Summary";
         return orderSummary;

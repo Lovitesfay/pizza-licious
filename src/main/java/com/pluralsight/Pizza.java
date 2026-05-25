@@ -1,19 +1,34 @@
 package com.pluralsight;
 
+import java.util.ArrayList;
+
 public class Pizza {
 
-    public String crustLevel;
-    public String size;
-    public String baseType;
+    private String crustLevel;
+    private String size;
+    private String baseType;
+
+    // arraylist
+    private ArrayList<String> meats;
+    private ArrayList<String> cheeses;
+    private ArrayList<String> toppings;
+    private ArrayList<String> sauces;
+
 
     // constructor
     public Pizza(String crustLevel, String size, String baseType) {
         this.crustLevel = crustLevel;
         this.size = size;
         this.baseType = baseType;
+        meats = new ArrayList<>();
+        cheeses = new ArrayList<>();
+        toppings = new ArrayList<>();
+        sauces = new ArrayList<>();
+
     }
 
     // getters and setters
+
     public String getCrustLevel() {
         return crustLevel;
     }
@@ -38,37 +53,63 @@ public class Pizza {
         this.baseType = baseType;
     }
 
-    public String addMeat(){
-        String meat = "Meat";
-        return meat;
-    }
-    public String addCheese(){
-        String cheese = "Cheese";
-        return cheese;
-
-    }
-    public String addToppings(){
-        String toppings = "Toppings";
-        return toppings;
-
-    }
-    public String addSauce(){
-        String sauce = "Sauce";
-        return sauce;
+    public void addMeat(String meat) {
+        meats.add(meat);
     }
 
-    public double getPrice(){
+    public void addCheese(String cheese) {
+        cheeses.add(cheese);
+    }
+
+    public void addToppings(String topping) {
+        toppings.add(topping);
+    }
+
+    public void addSauce(String sauce) {
+        sauces.add(sauce);
+    }
+
+    // price by size
+    public double getPrice() {
         double price = 0.0;
+
+        if (size.equalsIgnoreCase("small" + "s")) {
+            price = 12;
+
+        }
+        else if (size.equalsIgnoreCase("medium" + "m")) {
+            price = 14;
+        }
+        else if (size.equalsIgnoreCase("large" + "l")) {
+            price = 16;
+        }
+        else if (size.equalsIgnoreCase("xlarge" + "xl")) {
+            price = 18;
+        }
+
+        // extra charge for toppings
+        price += meats.size() * 1.50;
+        price += cheeses.size() * 1.00;
+
         return price;
     }
+        // summary
+    public String getSummary() {
+        String summary = "";
 
-    public String getSummary(){
-        String summary = "Summary";
+        summary += "Size: " + size + "\n";
+        summary += "Crust: " + crustLevel + "\n";
+        summary += "Base: " + baseType + "\n";
+
+        summary += "Meats: " + meats + "\n";
+        summary += "Cheeses: " + cheeses + "\n";
+        summary += "Toppings: " + toppings + "\n";
+        summary += "Sauces: " + sauces + "\n";
+
+        summary += "Price: $" + getPrice();
         return summary;
 
     }
-
-
 
 
 }
