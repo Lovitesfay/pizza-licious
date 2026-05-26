@@ -14,7 +14,6 @@ public class Pizza {
     private ArrayList<String> toppings;
     private ArrayList<String> sauces;
 
-
     // constructor
     public Pizza(String crustLevel, String size, String baseType) {
         this.crustLevel = crustLevel;
@@ -65,6 +64,11 @@ public class Pizza {
         toppings.add(topping);
     }
 
+    public void showToppings() {
+        for (String topping : toppings) {
+            System.out.println(topping);
+        }
+}
     public void addSauce(String sauce) {
         sauces.add(sauce);
     }
