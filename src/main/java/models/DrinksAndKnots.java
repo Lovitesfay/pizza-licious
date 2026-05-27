@@ -2,7 +2,7 @@ package models;
 
 import java.util.ArrayList;
 
-public class DrinksAndChips {
+public class DrinksAndKnots {
 
     private String name;
     private String size;
@@ -10,7 +10,7 @@ public class DrinksAndChips {
 
 
     // constructor
-    public DrinksAndChips(String name, String size, double price) {
+    public DrinksAndKnots(String name, String size, double price) {
         this.name = name;
         this.size = size;
         this.price = price;
@@ -34,4 +34,5 @@ public class DrinksAndChips {
     public String getSummary() {
         return size + " " + name + " - $" + price;
     }
+
 }

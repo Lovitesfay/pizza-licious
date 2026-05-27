@@ -6,14 +6,14 @@ public class Order {
 
     // arraylist
     private ArrayList<Pizza> pizzas;
-    private ArrayList<DrinksAndChips> drinks;
-    private ArrayList<DrinksAndChips> chips;
+    private ArrayList<DrinksAndKnots> drinks;
+    private ArrayList<DrinksAndKnots> knots;
 
     // constructor
     public Order() {
         pizzas = new ArrayList<>();
         drinks = new ArrayList<>();
-        chips = new ArrayList<>();
+        knots = new ArrayList<>();
 
     }
 
@@ -22,12 +22,12 @@ public class Order {
         pizzas.add(pizza);
     }
 
-    public void addDrink(DrinksAndChips drink) {
+    public void addDrink(DrinksAndKnots drink) {
         drinks.add(drink);
     }
 
-    public void addChips(DrinksAndChips chip) {
-        chips.add(chip);
+    public void addKnot(DrinksAndKnots knot) {
+        knots.add(knot);
 
     }
 
@@ -48,12 +48,12 @@ public class Order {
         return pizzas;
     }
 
-    public ArrayList<DrinksAndChips> getDrinks() {
+    public ArrayList<DrinksAndKnots> getDrinks() {
         return drinks;
     }
 
-    public ArrayList<DrinksAndChips> getChips() {
-        return chips;
+    public ArrayList<DrinksAndKnots> getChips() {
+        return knots;
     }
 
     // Order Summary
@@ -67,7 +67,7 @@ public class Order {
         }
 
         summary += "\nDrinks: " + drinks + "\n";
-        summary += "Chips: " + chips + "\n";
+        summary += "Chips: " + knots + "\n";
 
         summary += "\nTotal: $" + getTotal();
         return summary;
@@ -76,6 +76,8 @@ public class Order {
 
         pizzas.clear();
         drinks.clear();
-        chips.clear();
+        knots.clear();
     }
+
+
 }

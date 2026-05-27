@@ -1,6 +1,6 @@
 package ui;
 
-import models.DrinksAndChips;
+import models.DrinksAndKnots;
 import models.Order;
 import models.Pizza;
 import util.ReceiptWriter;
@@ -16,13 +16,19 @@ public class UserInterface {
 
 
     public void showHomeScreen() {
-        System.out.println("""
+
+
+        while (true) {
+
+            System.out.println("""
                 1) New Order
                 0) Exit
                 """);
 
-        while (true) {
-            switch (scanner.nextInt()) {
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
 
                 case 1:
                     showOrderMenu();
@@ -35,33 +41,40 @@ public class UserInterface {
     }
 
     public void showOrderMenu() {
-        System.out.println("""
+
+         Order order = new Order();
+
+
+        while (true) {
+
+            System.out.println("""
          1) Add Pizza
          2) Add Drink
-         3) Add Chips
+         3) Add Garlic Knots
          4) Checkout
          0) Cancel Order
                 """);
 
-        while (true) {
+            int choice = scanner.nextInt();
+            scanner.nextLine();
 
-            switch (scanner.nextInt()) {
+            switch (choice) {
                 case 1:
-                    addPizza(new Order());
+                    addPizza(order);
                     break;
                 case 2:
-                    addDrink(new Order());
+                    addDrink(order);
                     break;
                 case 3:
-                    addChips(new Order());
+                    addKnot(order);
                     break;
                 case 4:
-                    checkout(new Order());
+                    checkout(order);
                     break;
                 case 0:
-                    cancelOrder(new Order());
-                    System.out.println("Order has been cancelled.");
-                    break;
+                    cancelOrder(order);
+                    return;
+
                     default:
                         System.out.println("Invalid input!");
 
@@ -74,33 +87,72 @@ public class UserInterface {
 
         System.out.println("Hungry? we got pizza! ");
 
-        System.out.print("Enter crust type: ");
-        scanner.nextLine();
+        System.out.println("""
+            =====================
+                   PIZZA
+            =====================
+            """);
+
+        // crust
+        System.out.println("""
+            Crust Types:
+            Thin
+            Hand Tossed
+            Deep Dish
+            """);
+
+        System.out.print("Select crust: ");
         String crust = scanner.nextLine();
 
-        System.out.print("Enter pizza size: ");
+        // size
+        System.out.println("""
+            Sizes:
+            Small
+            Medium
+            Large
+            """);
+
+        System.out.print("Select size: ");
         String size = scanner.nextLine();
 
-        System.out.print("Enter base type: ");
-        String base = scanner.nextLine();
+        // sauce
+        System.out.println("""
+            Sauces:
+            Tomato
+            Alfredo
+            BBQ
+            """);
+
+        System.out.print("Select sauce: ");
+        String sauce = scanner.nextLine();
 
         // create pizza
-        Pizza pizza = new Pizza(crust, size, base);
+        Pizza pizza = new Pizza(crust, size, sauce);
 
-        // add toppings
+        // meat
         System.out.print("Add meat: ");
         String meat = scanner.nextLine();
         pizza.addMeat(meat);
 
+        // cheese
         System.out.print("Add cheese: ");
         String cheese = scanner.nextLine();
         pizza.addCheese(cheese);
 
-        // add pizza to order
+        // toppings
+        System.out.print("Add toppings: ");
+        String topping = scanner.nextLine();
+        pizza.addToppings(topping);
+
+        // stuffed crust
+        System.out.print("Stuffed crust? (yes/no): ");
+
+
+        // add to order
         order.addPizza(pizza);
 
+        System.out.println();
         System.out.println("Pizza added!");
-
     }
 
     public void addDrink(Order order) {
@@ -108,7 +160,7 @@ public class UserInterface {
         System.out.println("Thirsty? lets quench that thirst! ");
         System.out.println();
 
-        System.out.print("[COOL DRINKS]");
+        System.out.print("[  COLD DRINKS  ]");
         System.out.println();
         System.out.println("""
             Coke, Diet Coke, Pepsi
@@ -116,79 +168,105 @@ public class UserInterface {
             Ozarka, Dasani, Aquafina""");
 
         System.out.print("choose your drink: ");
-        String name = scanner.nextLine();
-        scanner.nextLine();
+        String drinkName = scanner.nextLine();
 
-        System.out.print("Enter drink size: ");
-        String size = scanner.nextLine();
-
-        System.out.print("""
+        System.out.println("""
                   20 oz
                   1 liter
                   2 liters
                 """);
-        System.out.println("choose size: ");
-        double drinkSize = scanner.nextDouble();
+        System.out.print("choose size: ");
+        String drinkSize = scanner.nextLine();
+        System.out.println();
+
+        // calculate price
+        double drinkPrice = 0;
 
 
-        scanner.nextLine();
+        if (drinkSize.equalsIgnoreCase("20oz")) {
+            drinkPrice = 2.00;
+        }
+        else if (drinkSize.equalsIgnoreCase("1ltr")) {
+            drinkPrice = 3.00;
+        }
+        else if (drinkSize.equalsIgnoreCase("2ltr")) {
+            drinkPrice = 4.00;
+        }
+
 
         // create drink
-        DrinksAndChips drink =
-                new DrinksAndChips(name, size, drinkSize);
+        DrinksAndKnots drink =
+                new DrinksAndKnots(drinkName, drinkSize, drinkPrice);
 
         // add to order
         order.addDrink(drink);
 
-        System.out.println("Drink added!");
+        System.out.println(drinkSize + " " + drinkName + " " + "$" + drinkPrice);
+        System.out.println();
+
+
+
 
 
     }
 
-    public void addChips(Order order) {
+    public void addKnot(Order order) {
 
-        System.out.println("Craving? we can satisfy you! ");
+
+
+        double price = 1.50;
+
+        DrinksAndKnots knots =
+                new DrinksAndKnots(
+                        "Garlic Knots",
+                        "Small",
+                        price
+                );
+
+        order.addKnot(knots);
+
+        System.out.println("Garlic Knots $" + price);
         System.out.println();
-        System.out.print(" KETTLE CHIPS ");
-        System.out.println();
-        System.out.println("""
-            Salt, BBQ, Jalapeño
-            Vinegar, Pepper, Mustard
-            Honey, Truffle, Habanero""");
-        System.out.print("Choose your chips: ");
-        String name = scanner.nextLine();
-        scanner.nextLine();
-
-        System.out.print("Enter Chips size: ");
-        String size = scanner.nextLine();
-        System.out.print("Enter drink price: ");
-        double price = scanner.nextDouble();
-        scanner.nextLine();
-
-        DrinksAndChips chips =
-                new DrinksAndChips(name, size, price);
-
-        // add to order
-        order.addChips(chips);
 
     }
 
     public void checkout(Order order) {
-        System.out.println(" Lets get you out of here ");
-        System.out.println("\n====== CHECKOUT ======");
+        System.out.println("""
+            =====================
+                  CHECKOUT
+            =====================
+            """);
 
-        // show order
+        // show order details
         System.out.println(order.getOrderSummary());
 
         // show total
-        System.out.println("\nTotal: $" + order.getTotal());
+        System.out.println("Total: $" + order.getTotal());
 
-        // save receipt
-        ReceiptWriter.saveReceipt(order);
+        System.out.println("""
+            1) Confirm
+            0) Cancel
+            """);
 
-        System.out.println("Thank you for your order!");
+        int choice = scanner.nextInt();
+        scanner.nextLine();
 
+        if (choice == 1) {
 
+            ReceiptWriter.saveReceipt(order);
+
+            System.out.println("Receipt saved!");
+            System.out.println("Thank you!");
+
+            showHomeScreen();
+        }
+        else {
+
+            order.cancelOrder();
+
+            System.out.println("Order cancelled.");
+
+        }
 
     }
 
@@ -198,9 +276,9 @@ public class UserInterface {
         scanner.nextLine();
         if (scanner.nextLine().equals("Yes")) {
             order.cancelOrder();
-
-            System.out.println("Order has been cancelled!");
+            System.out.println("Order cancelled!");
         }
+
 
 
 

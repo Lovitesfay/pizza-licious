@@ -1,6 +1,6 @@
 package util;
 
-import models.DrinksAndChips;
+import models.DrinksAndKnots;
 import models.Order;
 import models.Pizza;
 import java.io.BufferedWriter;
@@ -41,14 +41,14 @@ public class ReceiptWriter {
                 // write drinks
                 bufferedWriter.write("\nDrinks:\n");
 
-                for(DrinksAndChips drink : order.getDrinks()) {
+                for(DrinksAndKnots drink : order.getDrinks()) {
                     bufferedWriter.write(drink.getSummary() + "\n");
                 }
 
                 // write chips
                 bufferedWriter.write("\nChips:\n");
 
-                for(DrinksAndChips chip : order.getChips()) {
+                for(DrinksAndKnots chip : order.getChips()) {
                     bufferedWriter.write(chip.getSummary() + "\n");
                 }
 
