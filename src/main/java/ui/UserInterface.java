@@ -59,7 +59,7 @@ public class UserInterface {
                     checkout(new Order());
                     break;
                 case 0:
-                    cancelOrder();
+                    cancelOrder(new Order());
                     System.out.println("Order has been cancelled.");
                     break;
                     default:
@@ -192,8 +192,18 @@ public class UserInterface {
 
     }
 
-    public void cancelOrder() {
-        System.out.println("Why are you going to cancel?.");
+    public void cancelOrder(Order order) {
+        System.out.println("Would you like to cancel this order?.");
+        System.out.println("Yes or no");
+        scanner.nextLine();
+        if (scanner.nextLine().equals("Yes")) {
+            order.cancelOrder();
+
+            System.out.println("Order has been cancelled!");
+        }
+
+
+
 
 
     }
