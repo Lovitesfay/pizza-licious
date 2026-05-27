@@ -1,15 +1,13 @@
 package models;
 
-import com.pluralsight.Pizza;
-
 import java.util.ArrayList;
 
 public class Order {
 
     // arraylist
     private ArrayList<Pizza> pizzas;
-    private ArrayList<String> drinks;
-    private ArrayList<String> chips;
+    private ArrayList<DrinksAndChips> drinks;
+    private ArrayList<DrinksAndChips> chips;
 
     // constructor
     public Order() {
@@ -24,11 +22,11 @@ public class Order {
         pizzas.add(pizza);
     }
 
-    public void addDrink(String drink) {
+    public void addDrink(DrinksAndChips drink) {
         drinks.add(drink);
     }
 
-    public void addChips(String chip) {
+    public void addChips(DrinksAndChips chip) {
         chips.add(chip);
 
     }
@@ -50,11 +48,11 @@ public class Order {
         return pizzas;
     }
 
-    public ArrayList<String> getDrinks() {
+    public ArrayList<DrinksAndChips> getDrinks() {
         return drinks;
     }
 
-    public ArrayList<String> getChips() {
+    public ArrayList<DrinksAndChips> getChips() {
         return chips;
     }
 

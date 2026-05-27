@@ -1,4 +1,4 @@
-package com.pluralsight;
+package models;
 
 import java.util.ArrayList;
 
@@ -52,6 +52,22 @@ public class Pizza {
         this.baseType = baseType;
     }
 
+    public ArrayList<String> getMeats() {
+        return meats;
+    }
+
+    public ArrayList<String> getCheeses() {
+        return cheeses;
+    }
+
+    public ArrayList<String> getToppings() {
+        return toppings;
+    }
+
+    public ArrayList<String> getSauces() {
+        return sauces;
+    }
+
     public void addMeat(String meat) {
         meats.add(meat);
     }
@@ -65,9 +81,7 @@ public class Pizza {
     }
 
     public void showToppings() {
-        for (String topping : toppings) {
-            System.out.println(topping);
-        }
+        toppings.forEach(System.out::println);
 }
     public void addSauce(String sauce) {
         sauces.add(sauce);
@@ -94,6 +108,8 @@ public class Pizza {
         // extra charge for toppings
         price += meats.size() * 1.50;
         price += cheeses.size() * 1.00;
+        price += toppings.size() * 1.00;
+        price += sauces.size() * 1.00;
 
         return price;
     }
@@ -114,6 +130,8 @@ public class Pizza {
         return summary;
 
     }
+
+
 
 
 }
