@@ -72,4 +72,10 @@ public class Order {
         summary += "\nTotal: $" + getTotal();
         return summary;
     }
+    public void cancelOrder() {
+
+        pizzas.clear();
+        drinks.clear();
+        chips.clear();
+    }
 }
