@@ -9,7 +9,9 @@ import java.util.Scanner;
 
 public class UserInterface {
 
-    public void diplay(){}
+    public void diplay() {
+    }
+
     Scanner scanner = new Scanner(System.in);
 
     // constructor
@@ -21,9 +23,9 @@ public class UserInterface {
         while (true) {
 
             System.out.println("""
-                1) New Order
-                0) Exit
-                """);
+                    1) New Order
+                    0) Exit
+                    """);
 
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -42,18 +44,18 @@ public class UserInterface {
 
     public void showOrderMenu() {
 
-         Order order = new Order();
+        Order order = new Order();
 
 
         while (true) {
 
             System.out.println("""
-         1) Add Pizza
-         2) Add Drink
-         3) Add Garlic Knots
-         4) Checkout
-         0) Cancel Order
-                """);
+                    1) Add Pizza
+                    2) Add Drink
+                    3) Add Garlic Knots
+                    4) Checkout
+                    0) Cancel Order
+                    """);
 
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -75,8 +77,8 @@ public class UserInterface {
                     cancelOrder(order);
                     return;
 
-                    default:
-                        System.out.println("Invalid input!");
+                default:
+                    System.out.println("Invalid input!");
 
 
             }
@@ -88,64 +90,235 @@ public class UserInterface {
         System.out.println("Hungry? we got pizza! ");
 
         System.out.println("""
-            =====================
-                   PIZZA
-            =====================
-            """);
+                =====================
+                       PIZZA
+                =====================
+                """);
 
         // crust
         System.out.println("""
-            Crust Types:
-            Thin
-            Hand Tossed
-            Deep Dish
-            """);
+                Crust Types:
+                1) thin
+                2) regular
+                3) thick
+                4) cauliflower
+                """);
 
         System.out.print("Select crust: ");
-        String crust = scanner.nextLine();
+        int crustChoice = scanner.nextInt();
+        scanner.nextLine();
+
+        String crust = "";
+
+        switch (crustChoice) {
+
+            case 1:
+                crust = "Thin Crust";
+                break;
+
+            case 2:
+                crust = "Regular Crust";
+                break;
+
+            case 3:
+                crust = "Thick Crust";
+                break;
+            case 4:
+                crust = "Cauliflower Crust";
+                break;
+
+            case 0:
+                return;
+
+            default:
+                System.out.println("Invalid choice!");
+                return;
+        }
 
         // size
         System.out.println("""
-            Sizes:
-            Small
-            Medium
-            Large
-            """);
+                Pizza Sizes:
+                1) 8 inch
+                2) 12 inch
+                3) 16 inch
+                """);
 
         System.out.print("Select size: ");
-        String size = scanner.nextLine();
+        int sizeChoice = scanner.nextInt();
+        scanner.nextLine();
+
+        String size = "";
+
+        switch (sizeChoice) {
+
+            case 1:
+                size = "8";
+                break;
+
+            case 2:
+                size = "12";
+                break;
+
+            case 3:
+                size = "16";
+                break;
+
+            case 0:
+                return;
+
+            default:
+                System.out.println("Invalid choice!");
+                return;
+        }
+
 
         // sauce
         System.out.println("""
-            Sauces:
-            Tomato
-            Alfredo
-            BBQ
-            """);
+                Sauces:
+                1) Marinara 
+                2) Alfredo 
+                3) Pesto 
+                4) BBQ 
+                5) Buffalo 
+                6) Olive oil
+                """);
 
         System.out.print("Select sauce: ");
-        String sauce = scanner.nextLine();
+        int sauceChoice = scanner.nextInt();
+        scanner.nextLine();
+
+        String sauce = "";
+
+        switch (sauceChoice) {
+
+            case 1:
+                sauce = "Marinara";
+                break;
+            case 2:
+                sauce = "Alfredo";
+                break;
+            case 3:
+                sauce = "Pesto";
+                break;
+            case 4:
+                sauce = "BBQ";
+                break;
+            case 5:
+                sauce = "Buffalo";
+                break;
+            case 6:
+                sauce = "Olive oil";
+                break;
+            case 0:
+                return;
+
+            default:
+                System.out.println("Invalid choice!");
+                return;
+        }
 
         // create pizza
         Pizza pizza = new Pizza(crust, size, sauce);
 
-        // meat
-        System.out.print("Add meat: ");
+        // meats
+        System.out.println("""
+                Meats:
+                1) Pepperoni
+                2) Sausage
+                3) Ham
+                3) Bacon
+                4) Chicken
+                5) Meatball
+                
+                """);
+
+        // meat choice
+        System.out.print("add meat: ");
         String meat = scanner.nextLine();
-        pizza.addMeat(meat);
+
+        double price = 0;
+
+        if (!meat.equalsIgnoreCase("none")) {
+
+            pizza.addMeat(meat);
+
+            if (size.equals("8")) {
+                price += 1.00;
+            } else if (size.equals("12")) {
+                price += 2.00;
+            } else if (size.equals("16")) {
+                price += 3.00;
+            }
+        }
+
+        // extra meat
+        System.out.print("Extra meat? yes/no: ");
+        String extraMeat = scanner.nextLine();
+
+        if (extraMeat.equalsIgnoreCase("yes")) {
+
+            if (size.equals("8")) {
+                price += .50;
+            }
+            else if (size.equals("12")) {
+                price += 1.00;
+            }
+            else if (size.equals("16")) {
+                price += 1.50;
+            }
+        }
+
 
         // cheese
-        System.out.print("Add cheese: ");
+        System.out.println("""
+                Cheese:
+                Mozzarella
+                Parmesan
+                Ricotta
+                Goat Cheese
+                Buffalo
+                """);
+
+        // cheese
+        System.out.print("select cheese: ");
         String cheese = scanner.nextLine();
-        pizza.addCheese(cheese);
+
+
+        if (!cheese.equalsIgnoreCase("none")) {
+
+            pizza.addCheese(cheese);
+
+            if (size.equals("8")) {
+                price += .75;
+            }
+            else if (size.equals("12")) {
+                price += 1.50;
+            }
+            else if (size.equals("16")) {
+                price += 2.25;
+            }
+        }
 
         // toppings
-        System.out.print("Add toppings: ");
+        System.out.println("""
+                Toppings:
+                onions
+                mushrooms
+                bell peppers
+                olives
+                tomatoes
+                spinach
+                basil
+                pineapple
+                anchovies
+                
+                """);
+
+
+        // toppings
+        System.out.print("add toppings: ");
         String topping = scanner.nextLine();
         pizza.addToppings(topping);
-
-        // stuffed crust
-        System.out.print("Stuffed crust? (yes/no): ");
 
 
         // add to order
@@ -163,18 +336,19 @@ public class UserInterface {
         System.out.print("[  COLD DRINKS  ]");
         System.out.println();
         System.out.println("""
-            Coke, Diet Coke, Pepsi
-            Sprite, Dr Pepper, Mountain Dew
-            Ozarka, Dasani, Aquafina""");
+                Coke, Diet Coke, Pepsi
+                Sprite, Dr Pepper, Mountain Dew
+                Ozarka, Dasani, Aquafina""");
 
         System.out.print("choose your drink: ");
         String drinkName = scanner.nextLine();
 
         System.out.println("""
-                  20 oz
-                  1 liter
-                  2 liters
+                  Small
+                  Middle
+                  Large
                 """);
+
         System.out.print("choose size: ");
         String drinkSize = scanner.nextLine();
         System.out.println();
@@ -183,14 +357,12 @@ public class UserInterface {
         double drinkPrice = 0;
 
 
-        if (drinkSize.equalsIgnoreCase("20oz")) {
+        if (drinkSize.equalsIgnoreCase("small")) {
             drinkPrice = 2.00;
-        }
-        else if (drinkSize.equalsIgnoreCase("1ltr")) {
+        } else if (drinkSize.equalsIgnoreCase("meduim")) {
+            drinkPrice = 2.50;
+        } else if (drinkSize.equalsIgnoreCase("large")) {
             drinkPrice = 3.00;
-        }
-        else if (drinkSize.equalsIgnoreCase("2ltr")) {
-            drinkPrice = 4.00;
         }
 
 
@@ -205,13 +377,9 @@ public class UserInterface {
         System.out.println();
 
 
-
-
-
     }
 
     public void addKnot(Order order) {
-
 
 
         double price = 1.50;
@@ -232,10 +400,10 @@ public class UserInterface {
 
     public void checkout(Order order) {
         System.out.println("""
-            =====================
-                  CHECKOUT
-            =====================
-            """);
+                =====================
+                      CHECKOUT
+                =====================
+                """);
 
         // show order details
         System.out.println(order.getOrderSummary());
@@ -244,9 +412,9 @@ public class UserInterface {
         System.out.println("Total: $" + order.getTotal());
 
         System.out.println("""
-            1) Confirm
-            0) Cancel
-            """);
+                1) Confirm
+                0) Cancel
+                """);
 
         int choice = scanner.nextInt();
         scanner.nextLine();
@@ -259,8 +427,7 @@ public class UserInterface {
             System.out.println("Thank you!");
 
             showHomeScreen();
-        }
-        else {
+        } else {
 
             order.cancelOrder();
 
@@ -278,10 +445,6 @@ public class UserInterface {
             order.cancelOrder();
             System.out.println("Order cancelled!");
         }
-
-
-
-
 
 
     }
