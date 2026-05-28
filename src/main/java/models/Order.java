@@ -40,6 +40,16 @@ public class Order {
             total += pizza.getPrice();
         }
 
+        // drinks
+        for (DrinksAndKnots drink : drinks) {
+            total += drink.getPrice();
+        }
+
+        // garlic knots / chips
+        for (DrinksAndKnots knot : knots) {
+            total += knot.getPrice();
+        }
+
         return total;
     }
 
@@ -52,7 +62,7 @@ public class Order {
         return drinks;
     }
 
-    public ArrayList<DrinksAndKnots> getChips() {
+    public ArrayList<DrinksAndKnots> getKnots() {
         return knots;
     }
 
@@ -67,7 +77,7 @@ public class Order {
         }
 
         summary += "\nDrinks: " + drinks + "\n";
-        summary += "Chips: " + knots + "\n";
+        summary += "Knots: " + knots + "\n";
 
         summary += "\nTotal: $" + getTotal();
         return summary;

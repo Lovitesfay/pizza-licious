@@ -98,245 +98,255 @@ public class UserInterface {
         // crust
         System.out.println("""
                 Crust Types:
-                Thin
-                Regular
-                Thick
-                Cauliflower
+                1) Thin Crust
+                2) Regular Crust
+                3) Thick Crust
+                4) Cauliflower Crust
                 """);
 
         System.out.print("Select crust: ");
         String crust = scanner.nextLine();
 
-        // size
-        System.out.println("""
-                Pizza Sizes:
-                8 inch
-                12 inch
-                16 inch
-                """);
+        // stuffed crust
+        System.out.print("Would you like stuffed crust? yes/no: ");
+        String stuffedAnswer = scanner.nextLine();
 
-        System.out.print("Select size: ");
-        String size = scanner.nextLine();
+        boolean stuffedCrust = false;
 
-
-        // sauce
-        System.out.println("""
-                Sauces:
-                Marinara 
-                Alfredo 
-                Pesto 
-                BBQ 
-                Buffalo 
-                Olive oil
-                """);
-
-        System.out.print("Select sauce: ");
-        String sauce = scanner.nextLine();
-
-        // create pizza
-        Pizza pizza = new Pizza(crust, size, sauce);
-
-        // meats
-        System.out.println("""
-                Meats:
-                Pepperoni
-                Sausage
-                Ham
-                Bacon
-                Chicken
-                Meatball
-                
-                """);
-
-        // meat choice
-        System.out.print("add meat: ");
-        String meat = scanner.nextLine();
-
-        double price = 0;
-
-        if (!meat.equalsIgnoreCase("none")) {
-
-            pizza.addMeat(meat);
-
-            if (size.equalsIgnoreCase("8 inch")) {
-                price += 1.00;
-            } else if (size.equalsIgnoreCase("12 inch")) {
-                price += 2.00;
-            } else if (size.equalsIgnoreCase("16 inch")) {
-                price += 3.00;
-            }
+        if (stuffedAnswer.equalsIgnoreCase("yes")) {
+            stuffedCrust = true;
+            System.out.println("Stuffed crust added!");
         }
 
-        // extra meat
-        while (true) {
-
-            System.out.print("Would you like extra meat? yes/no: ");
-            String extraMeat = scanner.nextLine();
-
-            if (extraMeat.equalsIgnoreCase("no")) {
-                break;
-            }
-
+            // size
             System.out.println("""
-            Extra Meat Choices:
-            Pepperoni
-            Sausage
-            Ham
-            Bacon
-            Chicken
-            Meatball
-            """);
-
-            System.out.print("Choose extra meat: ");
-            String extraChoice = scanner.nextLine();
-
-            pizza.addMeat(extraChoice);
-
-            // extra meat pricing
-            if (size.equalsIgnoreCase("8 inch")) {
-                price += .50;
-            }
-            else if (size.equalsIgnoreCase("12 inch")) {
-                price += 1.00;
-            }
-            else if (size.equalsIgnoreCase("16 inch")) {
-                price += 1.50;
-            }
-
-            System.out.println(extraChoice + " added!");
-        }
+                    Pizza Sizes:
+                    8 inch
+                    12 inch
+                    16 inch
+                    """);
 
 
-        // cheese
-        System.out.println("""
-                Cheese:
-                Mozzarella
-                Parmesan
-                Ricotta
-                Goat Cheese
-                Buffalo
-                """);
+            System.out.print("Select size: ");
+            String size = scanner.nextLine();
 
-        // cheese
-        System.out.print("select cheese: ");
-        String cheese = scanner.nextLine();
+            String sauce = "";
 
+            // create pizza
+            Pizza pizza = new Pizza(crust, stuffedCrust, size, sauce);
 
-        if (!cheese.equalsIgnoreCase("none")) {
+            while (true) {
+                // sauce
+                System.out.println("""
+                        Sauces:
+                        Marinara 
+                        Alfredo 
+                        Pesto 
+                        BBQ 
+                        Buffalo 
+                        Olive oil
+                        """);
 
-            pizza.addCheese(cheese);
+                System.out.print("Choose sauce: ");
+                sauce = scanner.nextLine();
 
-            if (size.equals("8")) {
-                price += .75;
-            }
-            else if (size.equals("12")) {
-                price += 1.50;
-            }
-            else if (size.equals("16")) {
-                price += 2.25;
-            }
-        }
+                pizza.addSauce(sauce);
 
-        // extra cheese
-        while (true) {
+                System.out.print("Add another sauce? yes/no: ");
+                String answer = scanner.nextLine();
 
-            System.out.print("Would you like extra cheese? yes/no: ");
-            String extraCheese = scanner.nextLine();
-
-            if (extraCheese.equalsIgnoreCase("no")) {
-                break;
+                if (answer.equalsIgnoreCase("no")) {
+                    break;
+                }
             }
 
+
+            // meats
             System.out.println("""
-            Extra Cheese Choices:
-            Mozzarella
-            Parmesan
-            Ricotta
-            Goat Cheese
-            Buffalo
-            """);
+                    Meats:
+                    Pepperoni
+                    Sausage
+                    Ham
+                    Bacon
+                    Chicken
+                    Meatball
+                    
+                    """);
 
-            System.out.print("Choose extra cheese: ");
-            String extraChoice = scanner.nextLine();
+            // meat choice
+            System.out.print("add meat: ");
+            String meat = scanner.nextLine();
 
-            pizza.addCheese(extraChoice);
+            double price = 0;
 
-            // extra cheese pricing
-            if (size.equalsIgnoreCase("8 inch")) {
-                price += .30;
-            }
-            else if (size.equalsIgnoreCase("12 inch")) {
-                price += .60;
-            }
-            else if (size.equalsIgnoreCase("16 inch")) {
-                price += .90;
-            }
+            if (!meat.equalsIgnoreCase("none")) {
 
-            System.out.println(extraChoice + " added!");
-        }
+                pizza.addMeat(meat);
 
-        // toppings
-        System.out.println("""
-                Toppings:
-                onions
-                mushrooms
-                bell peppers
-                olives
-                tomatoes
-                spinach
-                basil
-                pineapple
-                anchovies
-                
-                """);
-
-
-        // toppings
-        System.out.print("add toppings: ");
-        String topping = scanner.nextLine();
-        pizza.addToppings(topping);
-
-        // extra toppings
-        while (true) {
-
-            System.out.print("Would you like extra toppings? yes/no: ");
-            String extraTopping = scanner.nextLine();
-
-            if (extraTopping.equalsIgnoreCase("no")) {
-                break;
+                if (size.equalsIgnoreCase("8 inch")) {
+                    price += 1.00;
+                } else if (size.equalsIgnoreCase("12 inch")) {
+                    price += 2.00;
+                } else if (size.equalsIgnoreCase("16 inch")) {
+                    price += 3.00;
+                }
             }
 
+            while (true) {
+
+                System.out.print("Would you like extra meat? yes/no: ");
+                String extraMeat = scanner.nextLine();
+
+                if (extraMeat.trim().equalsIgnoreCase("no")) {
+                    break;
+                }
+
+                System.out.println("""
+                        Extra Meat Choices:
+                        Pepperoni
+                        Sausage
+                        Ham
+                        Bacon
+                        Chicken
+                        Meatball
+                        """);
+
+                System.out.print("Choose extra meat: ");
+                String extraChoice = scanner.nextLine();
+
+                pizza.addMeat(extraChoice);
+
+                System.out.println(extraChoice + " added!");
+            }
+
+
+            // cheese
             System.out.println("""
-            Topping Choices:
-            Onions
-            Mushrooms
-            Bell Peppers
-            Olives
-            Tomatoes
-            Spinach
-            Basil
-            Pineapple
-            Anchovies
-            """);
+                    Cheese:
+                    Mozzarella
+                    Parmesan
+                    Ricotta
+                    Goat Cheese
+                    Buffalo
+                    """);
 
-            System.out.print("Choose topping: ");
-            String toppingChoice = scanner.nextLine();
+            // cheese
+            System.out.print("select cheese: ");
+            String cheese = scanner.nextLine();
 
-            pizza.addToppings(toppingChoice);
 
-            // toppings are free
-            System.out.println(toppingChoice + " added!");
+            if (!cheese.equalsIgnoreCase("none")) {
+
+                pizza.addCheese(cheese);
+
+                if (size.equals("8")) {
+                    price += .75;
+                } else if (size.equals("12")) {
+                    price += 1.50;
+                } else if (size.equals("16")) {
+                    price += 2.25;
+                }
+            }
+
+            // extra cheese
+            while (true) {
+
+                System.out.print("Would you like extra cheese? yes/no: ");
+                String extraCheese = scanner.nextLine();
+
+                if (extraCheese.trim().equalsIgnoreCase("no")) {
+                    break;
+                }
+
+                System.out.println("""
+                        Extra Cheese Choices:
+                        Mozzarella
+                        Parmesan
+                        Ricotta
+                        Goat Cheese
+                        Buffalo
+                        """);
+
+                System.out.print("Choose extra cheese: ");
+                String extraChoice = scanner.nextLine();
+
+                pizza.addCheese(extraChoice);
+
+                // extra cheese pricing
+                if (size.equalsIgnoreCase("8 inch")) {
+                    price += .30;
+                } else if (size.equalsIgnoreCase("12 inch")) {
+                    price += .60;
+                } else if (size.equalsIgnoreCase("16 inch")) {
+                    price += .90;
+                }
+
+                System.out.println(extraChoice + " added!");
+            }
+
+            // toppings
+            System.out.println("""
+                    Toppings:
+                    onions
+                    mushrooms
+                    bell peppers
+                    olives
+                    tomatoes
+                    spinach
+                    basil
+                    pineapple
+                    anchovies
+                    
+                    """);
+
+
+            // toppings
+            System.out.print("add toppings: ");
+            String topping = scanner.nextLine();
+            pizza.addToppings(topping);
+
+            // extra toppings
+            while (true) {
+
+                System.out.print("Would you like extra toppings? yes/no: ");
+                String extraTopping = scanner.nextLine();
+
+                if (extraTopping.equalsIgnoreCase("no")) {
+                    break;
+                }
+
+                System.out.println("""
+                        Topping Choices:
+                        Onions
+                        Mushrooms
+                        Bell Peppers
+                        Olives
+                        Tomatoes
+                        Spinach
+                        Basil
+                        Pineapple
+                        Anchovies
+                        """);
+
+                System.out.print("Choose topping: ");
+                String toppingChoice = scanner.nextLine();
+
+                pizza.addToppings(toppingChoice);
+
+                // toppings are free
+                System.out.println(toppingChoice + " added!");
+            }
+
+
+            // add to order
+            order.addPizza(pizza);
+
+            System.out.println();
+            System.out.println("Pizza added!");
         }
 
 
-        // add to order
-        order.addPizza(pizza);
-
-        System.out.println();
-        System.out.println("Pizza added!");
-    }
-
-    public void addDrink(Order order) {
+     public void addDrink(Order order) {
 
         System.out.println("Thirsty? lets quench that thirst! ");
         System.out.println();
@@ -353,7 +363,7 @@ public class UserInterface {
 
         System.out.println("""
                   Small
-                  Middle
+                  Meduim
                   Large
                 """);
 
@@ -407,17 +417,36 @@ public class UserInterface {
     }
 
     public void checkout(Order order) {
-        System.out.println("""
-                =====================
-                      CHECKOUT
-                =====================
-                """);
+        System.out.println("=====================");
+        System.out.println("      CHECKOUT");
+        System.out.println("=====================");
 
-        // show order details
-        System.out.println(order.getOrderSummary());
+// pizzas
+        System.out.println("\nPIZZAS");
+        System.out.println("---------------------");
 
-        // show total
-        System.out.println("Total: $" + order.getTotal());
+        for (Pizza pizza : order.getPizzas()) {
+            System.out.println(pizza);
+        }
+
+// drinks
+        System.out.println("\nDRINKS");
+        System.out.println("---------------------");
+
+        for (DrinksAndKnots drink : order.getDrinks()) {
+            System.out.println(drink);
+        }
+
+// knots
+        System.out.println("\nGARLIC KNOTS");
+        System.out.println("---------------------");
+
+        for (DrinksAndKnots knot : order.getKnots()) {
+            System.out.println(knot);
+        }
+
+        System.out.println("---------------------");
+        System.out.println("TOTAL: $" + order.getTotal());
 
         System.out.println("""
                 1) Confirm
@@ -434,7 +463,6 @@ public class UserInterface {
             System.out.println("Receipt saved!");
             System.out.println("Thank you!");
 
-            showHomeScreen();
         } else {
 
             order.cancelOrder();

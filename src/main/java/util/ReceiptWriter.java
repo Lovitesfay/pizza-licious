@@ -20,7 +20,7 @@ public class ReceiptWriter {
                 String timestamp = generateTimestamp();
 
                 String fileName =
-                        "src/main/resources/receipts/"
+                        "src/main/resources/receipts"
                                 + timestamp
                                 + ".txt";
 
@@ -32,24 +32,25 @@ public class ReceiptWriter {
                 bufferedWriter.write("====== PIZZA RECEIPT ======\n\n");
 
                 // write pizzas
-                for(Pizza pizza : order.getPizzas()) {
+                for (Pizza pizza : order.getPizzas()) {
 
                     bufferedWriter.write(pizza.getSummary());
+
                     bufferedWriter.write("\n-------------------\n");
                 }
 
                 // write drinks
                 bufferedWriter.write("\nDrinks:\n");
 
-                for(DrinksAndKnots drink : order.getDrinks()) {
+                for (DrinksAndKnots drink : order.getDrinks()) {
                     bufferedWriter.write(drink.getSummary() + "\n");
                 }
 
                 // write chips
-                bufferedWriter.write("\nChips:\n");
+                bufferedWriter.write("\nKnots:\n");
 
-                for(DrinksAndKnots chip : order.getChips()) {
-                    bufferedWriter.write(chip.getSummary() + "\n");
+                for (DrinksAndKnots knots : order.getKnots()) {
+                    bufferedWriter.write(knots.getSummary() + "\n");
                 }
 
                 // write total
@@ -60,11 +61,14 @@ public class ReceiptWriter {
 
                 System.out.println("Receipt saved successfully.");
 
-            }
-            catch(IOException e) {
 
-                System.out.println("Error writing receipt.");
+
+
             }
+            catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
         }
 
         private static String generateTimestamp() {

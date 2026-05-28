@@ -5,8 +5,9 @@ import java.util.ArrayList;
 public class Pizza {
 
     private String crustLevel;
+    private boolean stuffedCrust;
     private String size;
-    private String baseType;
+    private String sauce;
 
     // arraylist
     private ArrayList<String> meats;
@@ -15,10 +16,11 @@ public class Pizza {
     private ArrayList<String> sauces;
 
     // constructor
-    public Pizza(String crustLevel, String size, String baseType) {
+    public Pizza(String crustLevel, boolean stuffedCrust,  String size, String sauce) {
         this.crustLevel = crustLevel;
+        this.stuffedCrust = stuffedCrust;
         this.size = size;
-        this.baseType = baseType;
+        this.sauce = sauce;
         meats = new ArrayList<>();
         cheeses = new ArrayList<>();
         toppings = new ArrayList<>();
@@ -44,12 +46,12 @@ public class Pizza {
         this.size = size;
     }
 
-    public String getBaseType() {
-        return baseType;
+    public String getSauce() {
+        return sauce;
     }
 
-    public void setBaseType(String baseType) {
-        this.baseType = baseType;
+    public void setSauce(String sauce) {
+        this.sauce = sauce;
     }
 
     public ArrayList<String> getMeats() {
@@ -91,21 +93,20 @@ public class Pizza {
     public double getPrice() {
         double price = 0.0;
 
-        if (size.equalsIgnoreCase("small" + "s")) {
+        if (size.trim().equalsIgnoreCase("8 inch")) {
+            price = 8;
+        }
+        else if (size.trim().equalsIgnoreCase("12 inch")) {
             price = 12;
-
         }
-        else if (size.equalsIgnoreCase("medium" + "m")) {
-            price = 14;
-        }
-        else if (size.equalsIgnoreCase("large" + "l")) {
+        else if (size.trim().equalsIgnoreCase("16 inch")) {
             price = 16;
         }
-        else if (size.equalsIgnoreCase("xlarge" + "xl")) {
-            price = 18;
+
+        if (stuffedCrust) {
+            price += 2.00;
         }
 
-        // extra charge for toppings
         price += meats.size() * 1.50;
         price += cheeses.size() * 1.00;
         price += toppings.size() * 1.00;
@@ -119,19 +120,31 @@ public class Pizza {
 
         summary += "Size: " + size + "\n";
         summary += "Crust: " + crustLevel + "\n";
-        summary += "Base: " + baseType + "\n";
+        summary += "Stuffed Crust: " + stuffedCrust + "\n";
+        summary += "Sauce: " + sauces + "\n";
 
         summary += "Meats: " + meats + "\n";
         summary += "Cheeses: " + cheeses + "\n";
         summary += "Toppings: " + toppings + "\n";
-        summary += "Sauces: " + sauces + "\n";
 
         summary += "Price: $" + getPrice();
         return summary;
 
     }
 
+    @Override
+    public String toString() {
+
+        return "---------------------\n" +
+                size + " Pizza\n" +
+                "Crust: " + crustLevel + "\n" +
+                "Stuffed Crust: " + stuffedCrust + "\n" +
+                "Sauce: " + sauces + "\n" +
+                "Meats: " + meats + "\n" +
+                "Cheeses: " + cheeses + "\n" +
+                "Toppings: " + toppings + "\n" +
+                "Price: $" + getPrice() + "\n";
 
 
-
+    }
 }

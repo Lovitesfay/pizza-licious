@@ -35,4 +35,8 @@ public class DrinksAndKnots {
         return size + " " + name + " - $" + price;
     }
 
+    @Override
+    public String toString() {
+        return size + " " + name + " $" + price;
+    }
 }
