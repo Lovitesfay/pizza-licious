@@ -98,124 +98,40 @@ public class UserInterface {
         // crust
         System.out.println("""
                 Crust Types:
-                1) thin
-                2) regular
-                3) thick
-                4) cauliflower
+                Thin
+                Regular
+                Thick
+                Cauliflower
                 """);
 
         System.out.print("Select crust: ");
-        int crustChoice = scanner.nextInt();
-        scanner.nextLine();
-
-        String crust = "";
-
-        switch (crustChoice) {
-
-            case 1:
-                crust = "Thin Crust";
-                break;
-
-            case 2:
-                crust = "Regular Crust";
-                break;
-
-            case 3:
-                crust = "Thick Crust";
-                break;
-            case 4:
-                crust = "Cauliflower Crust";
-                break;
-
-            case 0:
-                return;
-
-            default:
-                System.out.println("Invalid choice!");
-                return;
-        }
+        String crust = scanner.nextLine();
 
         // size
         System.out.println("""
                 Pizza Sizes:
-                1) 8 inch
-                2) 12 inch
-                3) 16 inch
+                8 inch
+                12 inch
+                16 inch
                 """);
 
         System.out.print("Select size: ");
-        int sizeChoice = scanner.nextInt();
-        scanner.nextLine();
-
-        String size = "";
-
-        switch (sizeChoice) {
-
-            case 1:
-                size = "8";
-                break;
-
-            case 2:
-                size = "12";
-                break;
-
-            case 3:
-                size = "16";
-                break;
-
-            case 0:
-                return;
-
-            default:
-                System.out.println("Invalid choice!");
-                return;
-        }
+        String size = scanner.nextLine();
 
 
         // sauce
         System.out.println("""
                 Sauces:
-                1) Marinara 
-                2) Alfredo 
-                3) Pesto 
-                4) BBQ 
-                5) Buffalo 
-                6) Olive oil
+                Marinara 
+                Alfredo 
+                Pesto 
+                BBQ 
+                Buffalo 
+                Olive oil
                 """);
 
         System.out.print("Select sauce: ");
-        int sauceChoice = scanner.nextInt();
-        scanner.nextLine();
-
-        String sauce = "";
-
-        switch (sauceChoice) {
-
-            case 1:
-                sauce = "Marinara";
-                break;
-            case 2:
-                sauce = "Alfredo";
-                break;
-            case 3:
-                sauce = "Pesto";
-                break;
-            case 4:
-                sauce = "BBQ";
-                break;
-            case 5:
-                sauce = "Buffalo";
-                break;
-            case 6:
-                sauce = "Olive oil";
-                break;
-            case 0:
-                return;
-
-            default:
-                System.out.println("Invalid choice!");
-                return;
-        }
+        String sauce = scanner.nextLine();
 
         // create pizza
         Pizza pizza = new Pizza(crust, size, sauce);
@@ -223,12 +139,12 @@ public class UserInterface {
         // meats
         System.out.println("""
                 Meats:
-                1) Pepperoni
-                2) Sausage
-                3) Ham
-                3) Bacon
-                4) Chicken
-                5) Meatball
+                Pepperoni
+                Sausage
+                Ham
+                Bacon
+                Chicken
+                Meatball
                 
                 """);
 
@@ -242,30 +158,52 @@ public class UserInterface {
 
             pizza.addMeat(meat);
 
-            if (size.equals("8")) {
+            if (size.equalsIgnoreCase("8 inch")) {
                 price += 1.00;
-            } else if (size.equals("12")) {
+            } else if (size.equalsIgnoreCase("12 inch")) {
                 price += 2.00;
-            } else if (size.equals("16")) {
+            } else if (size.equalsIgnoreCase("16 inch")) {
                 price += 3.00;
             }
         }
 
         // extra meat
-        System.out.print("Extra meat? yes/no: ");
-        String extraMeat = scanner.nextLine();
+        while (true) {
 
-        if (extraMeat.equalsIgnoreCase("yes")) {
+            System.out.print("Would you like extra meat? yes/no: ");
+            String extraMeat = scanner.nextLine();
 
-            if (size.equals("8")) {
+            if (extraMeat.equalsIgnoreCase("no")) {
+                break;
+            }
+
+            System.out.println("""
+            Extra Meat Choices:
+            Pepperoni
+            Sausage
+            Ham
+            Bacon
+            Chicken
+            Meatball
+            """);
+
+            System.out.print("Choose extra meat: ");
+            String extraChoice = scanner.nextLine();
+
+            pizza.addMeat(extraChoice);
+
+            // extra meat pricing
+            if (size.equalsIgnoreCase("8 inch")) {
                 price += .50;
             }
-            else if (size.equals("12")) {
+            else if (size.equalsIgnoreCase("12 inch")) {
                 price += 1.00;
             }
-            else if (size.equals("16")) {
+            else if (size.equalsIgnoreCase("16 inch")) {
                 price += 1.50;
             }
+
+            System.out.println(extraChoice + " added!");
         }
 
 
@@ -299,6 +237,44 @@ public class UserInterface {
             }
         }
 
+        // extra cheese
+        while (true) {
+
+            System.out.print("Would you like extra cheese? yes/no: ");
+            String extraCheese = scanner.nextLine();
+
+            if (extraCheese.equalsIgnoreCase("no")) {
+                break;
+            }
+
+            System.out.println("""
+            Extra Cheese Choices:
+            Mozzarella
+            Parmesan
+            Ricotta
+            Goat Cheese
+            Buffalo
+            """);
+
+            System.out.print("Choose extra cheese: ");
+            String extraChoice = scanner.nextLine();
+
+            pizza.addCheese(extraChoice);
+
+            // extra cheese pricing
+            if (size.equalsIgnoreCase("8 inch")) {
+                price += .30;
+            }
+            else if (size.equalsIgnoreCase("12 inch")) {
+                price += .60;
+            }
+            else if (size.equalsIgnoreCase("16 inch")) {
+                price += .90;
+            }
+
+            System.out.println(extraChoice + " added!");
+        }
+
         // toppings
         System.out.println("""
                 Toppings:
@@ -319,6 +295,38 @@ public class UserInterface {
         System.out.print("add toppings: ");
         String topping = scanner.nextLine();
         pizza.addToppings(topping);
+
+        // extra toppings
+        while (true) {
+
+            System.out.print("Would you like extra toppings? yes/no: ");
+            String extraTopping = scanner.nextLine();
+
+            if (extraTopping.equalsIgnoreCase("no")) {
+                break;
+            }
+
+            System.out.println("""
+            Topping Choices:
+            Onions
+            Mushrooms
+            Bell Peppers
+            Olives
+            Tomatoes
+            Spinach
+            Basil
+            Pineapple
+            Anchovies
+            """);
+
+            System.out.print("Choose topping: ");
+            String toppingChoice = scanner.nextLine();
+
+            pizza.addToppings(toppingChoice);
+
+            // toppings are free
+            System.out.println(toppingChoice + " added!");
+        }
 
 
         // add to order
