@@ -1,0 +1,60 @@
+========================================
+              PIZZA LICIOUS
+========================================
+ Store #101   Dallas, TX
+
+ Store Number  (214) 555-1234
+
+ Order #1001   POS Pulse
+
+ Date: 05/28/2026 | Time: 11:53 PM
+
+ Cashier: LT | Register: 01
+
+----------------------------------------
+
+ PIZZAS
+----------------------------------------
+
+8 INCH  THIN CRUST PIZZA       $18.00
+ Stuffed Crust
+ Sauce: [, Marinara]
+ Cheese: [Mozzarella]
+ Meats: [pepperoni, bacon]
+ Toppings: [tomatoes, basil]
+
+----------------------------------------
+
+ DRINKS
+----------------------------------------
+
+large Coke                     $3.00
+
+----------------------------------------
+
+ GARLIC KNOTS
+----------------------------------------
+
+Small Garlic Knots             $1.50
+
+----------------------------------------
+
+Subtotal                       $22.50
+
+Tax (8.25%)                    $1.86
+
+----------------------------------------
+TOTAL                          $24.36
+----------------------------------------
+
+ Payment: Cash
+
+========================================
+
+       THANK YOU FOR VISITING!
+
+        FRESH • HOT • DELICIOUS
+
+        www.pizzalicious.com
+
+========================================

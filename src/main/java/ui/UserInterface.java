@@ -11,17 +11,15 @@ public class UserInterface {
 
     public void diplay() {
     }
-
+            // user input
     Scanner scanner = new Scanner(System.in);
 
-    // constructor
-
-
+    // first screen
     public void showHomeScreen() {
-
 
         while (true) {
 
+            // option for user
             System.out.println("""
                     1) New Order
                     0) Exit
@@ -41,7 +39,7 @@ public class UserInterface {
             }
         }
     }
-
+            // user will order here
     public void showOrderMenu() {
 
         Order order = new Order();
@@ -72,7 +70,7 @@ public class UserInterface {
                     break;
                 case 4:
                     checkout(order);
-                    break;
+                    return;
                 case 0:
                     cancelOrder(order);
                     return;
@@ -87,15 +85,81 @@ public class UserInterface {
 
     public void addPizza(Order order) {
 
-        System.out.println("Hungry? we got pizza! ");
+        System.out.println(" ");
 
         System.out.println("""
-                =====================
-                       PIZZA
-                =====================
+            =====================
+                   PIZZA
+            =====================
+
+            1) Build Your Own Pizza
+            2) Margherita
+            3) Veggie
+            """);
+
+        System.out.print("Choose pizza: ");
+        int pizzaChoice = scanner.nextInt();
+        scanner.nextLine();
+
+        // MARGHERITA
+        if (pizzaChoice == 2) {
+
+            System.out.println("""
+                Sizes:
+                8 inch
+                12 inch
+                16 inch
                 """);
 
-        // crust
+            System.out.print("Choose size: ");
+            String size = scanner.nextLine();
+
+            Pizza margherita =
+                    new Pizza("Regular", true, size, "Marinara");
+
+            margherita.addCheese("Mozzarella");
+            margherita.addToppings("Tomatoes");
+            margherita.addToppings("Basil");
+            margherita.addToppings("Olive Oil");
+
+            order.addPizza(margherita);
+
+            System.out.println("Margherita Pizza added!");
+            System.out.println();
+            return;
+        }
+
+        // VEGGIE
+        if (pizzaChoice == 3) {
+
+            System.out.println("""
+                Sizes:
+                8 inch
+                12 inch
+                16 inch
+                """);
+
+            System.out.print("Choose size: ");
+            String size = scanner.nextLine();
+
+            Pizza veggie =
+                    new Pizza("Regular", true,  size, "Marinara");
+
+            veggie.addCheese("Mozzarella");
+
+            veggie.addToppings("Bell Peppers");
+            veggie.addToppings("Spinach");
+            veggie.addToppings("Onions");
+
+            order.addPizza(veggie);
+
+            System.out.println("Veggie Pizza added!");
+            return;
+        }
+
+
+
+        // build your own pizza
         System.out.println("""
                 Crust Types:
                 1) Thin Crust
@@ -104,7 +168,7 @@ public class UserInterface {
                 4) Cauliflower Crust
                 """);
 
-        System.out.print("Select crust: ");
+        System.out.print("choose crust: ");
         String crust = scanner.nextLine();
 
         // stuffed crust
@@ -127,7 +191,7 @@ public class UserInterface {
                     """);
 
 
-            System.out.print("Select size: ");
+            System.out.print("choose size: ");
             String size = scanner.nextLine();
 
             String sauce = "";
@@ -348,7 +412,7 @@ public class UserInterface {
 
      public void addDrink(Order order) {
 
-        System.out.println("Thirsty? lets quench that thirst! ");
+
         System.out.println();
 
         System.out.print("[  COLD DRINKS  ]");
@@ -391,7 +455,7 @@ public class UserInterface {
         // add to order
         order.addDrink(drink);
 
-        System.out.println(drinkSize + " " + drinkName + " " + "$" + drinkPrice);
+        System.out.println("drink added!");
         System.out.println();
 
 
@@ -462,6 +526,7 @@ public class UserInterface {
 
             System.out.println("Receipt saved!");
             System.out.println("Thank you!");
+            System.out.println();
 
         } else {
 

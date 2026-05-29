@@ -29,37 +29,110 @@ public class ReceiptWriter {
                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
                 // receipt header
-                bufferedWriter.write("====== PIZZA RECEIPT ======\n\n");
+                bufferedWriter.write("========================================\n");
+                bufferedWriter.write("              PIZZA LICIOUS\n");
+                bufferedWriter.write("========================================\n");
 
-                // write pizzas
+                bufferedWriter.write(" Store #101   Dallas, TX\n\n");
+                bufferedWriter.write(" Store Number  (214) 555-1234\n\n");
+
+                bufferedWriter.write(" Order #1001   POS Pulse\n\n");
+
+                bufferedWriter.write(    " " + generateDateTime() + "\n\n");
+
+                bufferedWriter.write(" Cashier: LT | Register: 01\n\n");
+
+                bufferedWriter.write("----------------------------------------\n\n");
+
+                bufferedWriter.write(" PIZZAS\n");
+                bufferedWriter.write("----------------------------------------\n\n");
+
                 for (Pizza pizza : order.getPizzas()) {
 
-                    bufferedWriter.write(pizza.getSummary());
+                    bufferedWriter.write(
+                            String.format("%-30s $%.2f%n",
+                                    pizza.getSize().toUpperCase() + " " +
+                                            pizza.getCrustLevel().toUpperCase() + " PIZZA",
+                                    pizza.getPrice())
+                    );
 
-                    bufferedWriter.write("\n-------------------\n");
+                    if (pizza.isStuffedCrust()) {
+                        bufferedWriter.write(" Stuffed Crust\n");
+                    }
+
+                    bufferedWriter.write(" Sauce: " + pizza.getSauces() + "\n");
+                    bufferedWriter.write(" Cheese: " + pizza.getCheeses() + "\n");
+                    bufferedWriter.write(" Meats: " + pizza.getMeats() + "\n");
+                    bufferedWriter.write(" Toppings: " + pizza.getToppings() + "\n\n");
                 }
 
-                // write drinks
-                bufferedWriter.write("\nDrinks:\n");
+                bufferedWriter.write("----------------------------------------\n\n");
+
+                bufferedWriter.write(" DRINKS\n");
+                bufferedWriter.write("----------------------------------------\n\n");
 
                 for (DrinksAndKnots drink : order.getDrinks()) {
-                    bufferedWriter.write(drink.getSummary() + "\n");
+
+                    bufferedWriter.write(
+                            String.format("%-30s $%.2f%n",
+                                    drink.getSize() + " " + drink.getName(),
+                                    drink.getPrice())
+                    );
                 }
 
-                // write chips
-                bufferedWriter.write("\nKnots:\n");
+                bufferedWriter.write("\n----------------------------------------\n\n");
 
-                for (DrinksAndKnots knots : order.getKnots()) {
-                    bufferedWriter.write(knots.getSummary() + "\n");
+                bufferedWriter.write(" GARLIC KNOTS\n");
+                bufferedWriter.write("----------------------------------------\n\n");
+
+                for (DrinksAndKnots knot : order.getKnots()) {
+
+                    bufferedWriter.write(
+                            String.format("%-30s $%.2f%n",
+                                    knot.getSize() + " " + knot.getName(),
+                                    knot.getPrice()));
+;
                 }
 
-                // write total
-                bufferedWriter.write("\nTotal: $" + order.getTotal());
+                bufferedWriter.write("\n----------------------------------------\n\n");
 
-                // close writer
+                bufferedWriter.write(
+                        String.format("%-30s $%.2f%n",
+                                "Subtotal",
+                                order.getTotal()) + "\n"
+                );
+
+                double tax = order.getTotal() * .0825;
+
+                bufferedWriter.write(
+                        String.format("%-30s $%.2f%n",
+                                "Tax (8.25%)",
+                                tax) + "\n"
+                );
+
+                bufferedWriter.write("----------------------------------------\n");
+
+                bufferedWriter.write(
+                        String.format("%-30s $%.2f%n",
+                                "TOTAL",
+                                order.getTotal() + tax));
+
+                bufferedWriter.write("----------------------------------------\n\n");
+
+                bufferedWriter.write(" Payment: Cash\n\n");
+
+                bufferedWriter.write("========================================\n\n");
+
+                bufferedWriter.write("       THANK YOU FOR VISITING!\n\n");
+                System.out.println("\n");
+
+                bufferedWriter.write("        FRESH • HOT • DELICIOUS\n\n");
+
+                bufferedWriter.write("        www.pizzalicious.com\n\n");
+
+                bufferedWriter.write("========================================\n");
+
                 bufferedWriter.close();
-
-                System.out.println("Receipt saved successfully.");
 
 
 
@@ -71,7 +144,23 @@ public class ReceiptWriter {
 
         }
 
-        private static String generateTimestamp() {
+        public static String generateDateTime() {
+
+            LocalDateTime now = LocalDateTime.now();
+
+            DateTimeFormatter dateFormatter =
+                    DateTimeFormatter.ofPattern("MM/dd/yyyy");
+
+            DateTimeFormatter timeFormatter =
+                    DateTimeFormatter.ofPattern("hh:mm a");
+
+            return "Date: "
+                    + now.format(dateFormatter)
+                    + " | Time: "
+                    + now.format(timeFormatter);
+
+        }
+        public static String generateTimestamp() {
 
             LocalDateTime now = LocalDateTime.now();
 

@@ -26,6 +26,7 @@ public class Pizza {
         toppings = new ArrayList<>();
         sauces = new ArrayList<>();
 
+        sauces.add(sauce);
     }
 
     // getters and setters
@@ -36,6 +37,10 @@ public class Pizza {
 
     public void setCrustLevel(String crustLevel) {
         this.crustLevel = crustLevel;
+    }
+
+    public boolean isStuffedCrust() {
+        return stuffedCrust;
     }
 
     public String getSize() {
